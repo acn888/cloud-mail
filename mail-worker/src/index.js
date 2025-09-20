@@ -7,15 +7,7 @@ export default {
 		const url = new URL(req.url)
 
         if (url.pathname === '/api/clear-all') {
-          // 安全确认参数
-          if (url.searchParams.get('confirm') !== 'yes') {
-            return new Response(JSON.stringify({
-              success: false,
-              message: "请在 URL 里加 ?confirm=yes 确认清空"
-            }), { headers: { "Content-Type": "application/json" } });
-          }
-      
-          try {
+			try {
             // 查询删除前数量
             const before = await env.db.prepare(`SELECT COUNT(*) AS c FROM email`).first();
       
